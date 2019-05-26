@@ -1,0 +1,13 @@
+# Modules
+/node_modules
+
+# Environment variables
+.env
+
+# Config files
+config.json
+config-db.json
+
+# Init files
+config.ini
+
