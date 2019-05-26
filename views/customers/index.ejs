@@ -1,0 +1,42 @@
+<% include ../partials/header.ejs %>
+
+<h3>Customers List</h3>
+
+<p><a href="/">Home</a></p>
+<p><a href="/customers/create">Create</a></p>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    <% customers.map( (customer, index) => { %>
+        <tr>
+            <td><%= index %></td>
+            <td><%= customer.id %></td>
+            <td><%= customer.name %></td>
+            <td>
+                <button 
+                    type="submit" 
+                    href="/customers/update/<%= customer.id %>"
+                >Edit</button>
+                <button
+                    type="submit" 
+                    href="/customers/delete/<%= customer.id %>"
+                    onClick="return confirm(Do you really want to delete this record (<%= customer.name %>)?)"
+                >Delete</button>
+            </td>
+            <td>
+                <a href="/customers/update/<%= customer.id %>">Edit</a>
+                <a 
+                    href="/customers/delete/<%= customer.id %>"
+                    onClick="return confirm(Do you really want to delete this record (<%= customer.name %>)?)"
+                >Delete</a>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+<% include ../partials/footer.ejs %>
