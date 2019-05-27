@@ -1,4 +1,4 @@
-module.exports = loggingSqlCommand = (logMessage) => {
-    console.log(new Date(), logMessage)
+module.exports = loggingSqlCommand = (logMessage, prefix = null) => {
+    console.log(new Date(), prefix, logMessage)
 }
 
