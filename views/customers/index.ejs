@@ -5,38 +5,56 @@
 <p><a href="/">Home</a></p>
 <p><a href="/customers/create">Create</a></p>
 
-<table>
+<div class="input-group mb-3">
+  <input 
+    type="text" 
+    class="form-control" 
+    placeholder="Insert here part of name to find it" 
+    aria-label="Insert here part of name to find it" 
+    aria-describedby="button-addon2"
+  >
+  <div class="input-group-append">
+    <div class="btn-group" role="group" aria-label="...">
+        <a 
+            class="btn btn-outline-secondary" 
+            type="button" 
+            id="btnFind"
+            name="btnFind"
+            href="/"
+            onClick="return confirm('ok')"
+        >Find like Name</a>
+    </div>
+</div>
+
+<table class="table table-striped table-bordered table-hover table-sm">
+    <caption><%= customers.length %> record<%= (customers.length > 1 ? 's' : '' ) %></caption>
+    <thead class="thead-dark">
     <tr>
-        <th>#</th>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Action</th>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Delete</th>
     </tr>
+  </thead>
+  <tbody>
     <% customers.map( (customer, index) => { %>
         <tr>
-            <td><%= index %></td>
             <td><%= customer.id %></td>
-            <td><%= customer.name %></td>
-            <td>
-                <button 
-                    type="submit" 
-                    href="/customers/update/<%= customer.id %>"
-                >Edit</button>
-                <button
-                    type="submit" 
-                    href="/customers/delete/<%= customer.id %>"
-                    onClick="return confirm(Do you really want to delete this record (<%= customer.name %>)?)"
-                >Delete</button>
+            <th scope="row"><a href="/customers/update/<%= customer.id %>"><%= customer.name %></a></th>
+            <td><%= customer.birth_day %></td>
             </td>
             <td>
-                <a href="/customers/update/<%= customer.id %>">Edit</a>
-                <a 
-                    href="/customers/delete/<%= customer.id %>"
-                    onClick="return confirm(Do you really want to delete this record (<%= customer.name %>)?)"
-                >Delete</a>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a
+                        type="button" 
+                        href="/customers/delete/<%= customer.id %>"
+                        onClick="return confirm('Do you really want to delete the record<%= customer.id %>-<%= customer.name %>?')"
+                    >&times;</a>
+                </div>
             </td>
         </tr>
     <% }) %>
+  </tbody>
 </table>
 
 <% include ../partials/footer.ejs %>
