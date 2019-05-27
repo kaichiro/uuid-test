@@ -13,11 +13,7 @@ const createForm = (req, res) => {
     res.render('customers/create')
 }
 const createProcess = async (connection, req, res) => {
-    const data = {
-        id: uuid(),
-        name: req.body.name
-    }
-    await customersModels.create(connection, data)
+    await customersModels.create(connection, { id: uuid(), ...req.body })
     res.redirect('/customers')
 }
 
@@ -31,7 +27,7 @@ const updateProcess = async (connection, req, res) => {
     const idCustumer = req.params.id
     const data = {
         id: idCustumer,
-        name: req.body.name
+        ...req.body,
     }
     await customersModels.update(connection, idCustumer, data)
     res.redirect('/customers')
